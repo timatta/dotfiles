@@ -1,0 +1,9 @@
+libcst
+dbus-fast
+psutil
+coverage
+pytest-cov
+tox
+pre-commit
+PyGObject
+isort
