@@ -115,12 +115,6 @@ keys = [
     ),
     Key(
         [mod],
-        "l",
-        lazy.spawn("rofi -show keys"),
-        desc="Spawn a command using a prompt widget",
-    ),
-    Key(
-        [mod],
         "F1",
         lazy.spawn("brave"),
         desc="Spawn a browser",
@@ -294,10 +288,6 @@ keys.extend(
     [
         Key([mod], "F10", lazy.group["scratchpad"].dropdown_toggle("term")),
         Key([mod], "F9", lazy.group["scratchpad"].dropdown_toggle("ranger")),
-        Key([mod], "v", lazy.group["scratchpad"].dropdown_toggle("volume")),
-        Key([mod], "m", lazy.group["scratchpad"].dropdown_toggle("mus")),
-        Key([mod], "b", lazy.group["scratchpad"].dropdown_toggle("news")),
-        Key([mod, "shift"], "n", lazy.group["scratchpad"].dropdown_toggle("term2")),
     ]
 )
 
