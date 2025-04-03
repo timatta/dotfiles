@@ -58,10 +58,20 @@ keys = [
     Key([mod, "shift"], "k", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "Left", lazy.layout.shrink(), desc="Grow window to the left"),
-    Key([mod, "control"], "Right", lazy.layout.grow(), desc="Grow window to the right"),
-    Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
-    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+    Key(
+        [mod, "mod1"],
+        "Left",
+        lazy.layout.shrink(),
+        desc="Grow window to the left",
+    ),
+    Key(
+        [mod, "mod1"],
+        "Right",
+        lazy.layout.grow(),
+        desc="Grow window to the right",
+    ),
+    # Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
+    # Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.reset(), desc="Reset all window sizes"),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     # Toggle between split and unsplit sides of stack.
@@ -95,6 +105,9 @@ keys = [
     ###########################
     ##### Custom Keybindings #####
     #######################
+    # Scratchpad keybindings
+    Key([mod], "F10", lazy.group["scratchpad"].dropdown_toggle("term")),
+    Key([mod], "F9", lazy.group["scratchpad"].dropdown_toggle("ranger")),
     Key(
         [mod],
         "F11",
@@ -118,6 +131,18 @@ keys = [
         "F1",
         lazy.spawn("brave"),
         desc="Spawn a browser",
+    ),
+    Key(
+        [mod, "control"],
+        "Right",
+        lazy.screen.next_group(skip_empty=True),
+        "Switch to group to the right",
+    ),
+    Key(
+        [mod, "control"],
+        "Left",
+        lazy.screen.prev_group(skip_empty=True),
+        "Switch to group to the right",
     ),
 ]
 
@@ -145,12 +170,12 @@ group_names = [
     "2",
     "3",
     "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "0",
+    # "5",
+    # "6",
+    # "7",
+    # "8",
+    # "9",
+    # "0",
 ]
 
 # FOR AZERTY KEYBOARDS
@@ -158,17 +183,23 @@ group_names = [
 
 # group_labels = ["1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "0",]
 group_labels = [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
+    "1 ",
+    "2 ",
+    "3 ",
+    "4 ",
 ]
+# group_labels = [
+#    "",
+#    "",
+#    "",
+#    "",
+# "",
+# "",
+# "",
+# "",
+# "",
+# "",
+# ]
 # group_labels = ["Web", "Edit/chat", "Image", "Gimp", "Meld", "Video", "Vb", "Files", "Mail", "Music",]
 
 group_layouts = [
@@ -176,12 +207,12 @@ group_layouts = [
     "monadtall",
     "monadtall",
     "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
-    "monadtall",
+    # "monadtall",
+    # "monadtall",
+    # "monadtall",
+    # "monadtall",
+    # "monadtall",
+    # "monadtall",
 ]
 # group_layouts = ["monadtall", "matrix", "monadtall", "bsp", "monadtall", "matrix", "monadtall", "bsp", "monadtall", "monadtall",]
 
@@ -252,43 +283,35 @@ groups.append(
                 y=0.1,
                 opacity=0.9,
             ),
-            DropDown(
-                "volume",
-                "kitty --class=volume -e pulsemixer",
-                width=0.8,
-                height=0.8,
-                x=0.1,
-                y=0.1,
-                opacity=0.9,
-            ),
-            DropDown(
-                "mus",
-                "kitty --class=mus -e flatpak run io.github.hrkfdn.ncspot",
-                width=0.8,
-                height=0.8,
-                x=0.1,
-                y=0.1,
-                opacity=0.9,
-            ),
-            DropDown(
-                "news",
-                "kitty --class=news -e newsboat",
-                width=0.8,
-                height=0.8,
-                x=0.1,
-                y=0.1,
-                opacity=0.9,
-            ),
+            # DropDown(
+            #    "volume",
+            #    "kitty --class=volume -e pulsemixer",
+            #    width=0.8,
+            #    height=0.8,
+            #    x=0.1,
+            #    y=0.1,
+            #    opacity=0.9,
+            # ),
+            # DropDown(
+            #    "mus",
+            #    "kitty --class=mus -e flatpak run io.github.hrkfdn.ncspot",
+            #    width=0.8,
+            #    height=0.8,
+            #    x=0.1,
+            #    y=0.1,
+            #    opacity=0.9,
+            # ),
+            # DropDown(
+            #    "news",
+            #    "kitty --class=news -e newsboat",
+            #    width=0.8,
+            #    height=0.8,
+            #    x=0.1,
+            #    y=0.1,
+            #    opacity=0.9,
+            # ),
         ],
     )
-)
-
-# Scratchpad keybindings
-keys.extend(
-    [
-        Key([mod], "F10", lazy.group["scratchpad"].dropdown_toggle("term")),
-        Key([mod], "F9", lazy.group["scratchpad"].dropdown_toggle("ranger")),
-    ]
 )
 
 
@@ -321,7 +344,8 @@ layout_theme = {
 
 layouts = [
     layout.MonadTall(**layout_theme),
-    # layout.MonadWide(**layout_theme),
+    layout.MonadWide(**layout_theme),
+    layout.MonadThreeCol(**layout_theme),
     # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     # layout.Max(),
     # Try more layouts by unleashing below layouts.
@@ -347,7 +371,7 @@ screens = [
         top=bar.Bar(
             [
                 widget.GroupBox(
-                    fontsize=25,
+                    fontsize=18,
                     highlight_method="text",
                     urgent_alert_method="text",
                     padding=5,
@@ -364,8 +388,8 @@ screens = [
                 widget.Spacer(length=16),
                 widget.Clock(format="%d.%m.%y, %H:%M", foreground=colors[8]),
                 widget.Spacer(length=16),
-                widget.Net(fontsize=13),
-                widget.NetGraph(),
+                # widget.Net(fontsize=13),
+                # widget.NetGraph(),
                 # widget.Prompt(),
                 # widget.WindowName(),
                 # widget.Chord(
