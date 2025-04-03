@@ -1,0 +1,3 @@
+#!/bin/sh
+
+DISPLAY=:0 feh --no-fehbg --bg-scale --randomize '/home/tim/.config/backgrounds/wallpapers/'
